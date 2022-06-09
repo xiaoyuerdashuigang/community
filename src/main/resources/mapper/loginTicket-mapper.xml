@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nowcoder.community.dao.LoginTicketMapper">
+
+    <!-- 查询所有字段-->
+    <sql id="insertField">
+        user_id,ticket,status,expired
+    </sql>
+
+    <!-- 查询所有字段-->
+    <sql id="selectField">
+        id,user_id,ticket,status,expired
+    </sql>
+
+    <!-- 插入登录凭证-->
+    <insert id="insertLoginTicket" useGeneratedKeys="true" keyProperty="id">
+        insert into login_ticket (<include refid="insertField"></include>)
+        values(#{userId},#{ticket},#{status},#{expired})
+    </insert>
+
+    <!-- 根据登录凭证查询-->
+    <select id="selectByTicket" parameterType="String">
+        select
+        <include refid="selectField"></include>
+        from login_ticket
+        <where>
+            <if test="ticket != null and ticket != ''">
+                and ticket = #{ticket}
+            </if>
+        </where>
+    </select>
+
+    <!-- 修改登录凭证的状态-->
+    <update id="updateStatus">
+        update login_ticket
+        <set>
+            status = #{status}
+        </set>
+        where ticket = #{ticket}
+    </update>
+</mapper>
