@@ -21,7 +21,7 @@
     </insert>
 
     <!-- 根据登录凭证查询-->
-    <select id="selectByTicket" parameterType="String">
+    <select id="selectByTicket" parameterType="String" resultType="loginTicket">
         select
         <include refid="selectField"></include>
         from login_ticket

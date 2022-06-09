@@ -1,5 +1,6 @@
 package com.pudongdevelopmentbank.community.service;
 
+import com.pudongdevelopmentbank.community.entity.LoginTicket;
 import com.pudongdevelopmentbank.community.entity.User;
 
 import java.util.Map;
@@ -20,4 +21,6 @@ public interface UserService {
     Map<String, Object> login(String username, String password, int expiredSeconds);
 
     void logout(String ticket);
+
+    LoginTicket findLoginTicket(String ticket);
 }
